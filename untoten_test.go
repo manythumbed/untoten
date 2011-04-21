@@ -18,23 +18,23 @@ func TestSomething(t *testing.T) {
 	if err != nil {
 		t.Errorf("Error parsing html:- %v", err)
 	}
-	var fn func(*html.Node)
-	fn = func(n *html.Node) {
+	var fn func(*html.Node, int)
+	fn = func(n *html.Node, i int) {
 		switch n.Type {
 		default:
-			fmt.Println("Unexpected type")
+			fmt.Println(i, "Unexpected type")
 		case html.TextNode:
-			fmt.Println("Text Node", n.Data)
+			fmt.Println(i, "Text Node", n.Data, n.Parent)
 		case html.DocumentNode:
-			fmt.Println("Document Node")
+			fmt.Println(i, "Document Node")
 		case html.ElementNode:
-			fmt.Println("Element Node", n.Data)
+			fmt.Println(i, "Element Node", n.Data, n.Parent)
 		case html.CommentNode:
-			fmt.Println("Element Node")
+			fmt.Println(i, "Element Node")
 		}
 		for _, c := range n.Child {
-			fn(c)
+			fn(c, i + 1)
 		}
 	}
-	fn(doc)
+	fn(doc, 0)
 }
