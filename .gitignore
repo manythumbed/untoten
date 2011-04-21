@@ -1,0 +1,5 @@
+*.swp
+_test
+_test*
+_gotest*
+*.out

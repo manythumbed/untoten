@@ -24,7 +24,13 @@ func TestSomething(t *testing.T) {
 		default:
 			fmt.Println("Unexpected type")
 		case html.TextNode:
-			fmt.Println("Text Node")
+			fmt.Println("Text Node", n.Data)
+		case html.DocumentNode:
+			fmt.Println("Document Node")
+		case html.ElementNode:
+			fmt.Println("Element Node", n.Data)
+		case html.CommentNode:
+			fmt.Println("Element Node")
 		}
 		for _, c := range n.Child {
 			fn(c)
